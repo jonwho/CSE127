@@ -40,13 +40,13 @@ if(isset($_POST['NEW']))
 	// user account and send him to view.php.
 	$query = pg_query($con, "SELECT username FROM poster WHERE username='$username'");
 	if(!$query)
-		// handle error
-	$row = pg_fetch_row($query);
-	if(!$row)
 	{
+		// handle error
 		$stmt = "INSERT INTO poster(username, password) VALUES('$username', '$password')";
-		pg_query($con, $stmt) or die ("Failed to execute: $stmt\n");
+		$query = pg_query($con, $stmt);
+		if($query)
 		header("Location: view.php?user=$username");
+
 	}
 	else
 	{
