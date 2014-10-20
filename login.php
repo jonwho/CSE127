@@ -41,6 +41,7 @@ if(isset($_POST['NEW']))
 	$stmt = "INSERT INTO poster(username, password) VALUES('$username', '$password')";
 	$query = pg_query($con, $stmt);
 	if($query)
+	{
 		header("Location: view.php?user=$username");
 	}
 	else
