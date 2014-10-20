@@ -1,3 +1,14 @@
+<DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.2//EN">
+<HEAD>
+    <TITLE>Chattr</TITLE>
+</HEAD>
+<BODY BGCOLOR=WHITE>
+<TABLE ALIGN="CENTER">
+<TR><TD>
+<H1>Chattr</H1>
+</TD></TR>
+<TR><TD>
+</TD></TR>
 <?php
 
 // The login.php is invoked when the user is either trying to create a new
@@ -15,30 +26,40 @@ $user = "chattr";
 $pass = "toomanysecrets";
 $db = "chattr";
 
+// don't let user jump to login.php
+if($_POST == null)
+	header("Location: index.php");
 
-
+$username = $_POST['USER'];
+$password = $_POST['PASS'];
 if(isset($_POST['NEW'])) {
 	// Your new user creation code goes here. If the user name
 	// already exists, then display an error. Otherwise, create a new
 	// user account and send him to view.php.
+	$query = pg_query($con, "SELECT username FROM poster WHERE username'$username'");
+	if(!$query)
+		// handle error
+	if(!$row = pg_fetch_row($query))
+	{
+		$stmt = "INSERT INTO poster(username, password) VALUES('$username', '$password');
+		pg_query($con, $stmt) or die("Failed to execute: $stmt\n");
+		header("Location: view.php?user=$username");
+	}
+	else
+	{
+		<TR>
+			<TD>
+				<H2><?php echo "User $username already exists!" ?></H2>
+			</TD>
+		</TR>
+	}
 } else {
 	// Your user login code goes here. If the user name and password
 	// are not correct, then display an error. Otherwise, log in the
 	// user and send him to view.php.
+	<H2><?php echo "YOUR ERROR MESSAGE GOES HERE" ?></H2>
+	<a href="index.php">Back</a>
 }
 ?>
-<DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.2//EN">
-<HEAD>
-    <TITLE>Chattr</TITLE>
-</HEAD>
-<BODY BGCOLOR=WHITE>
-<TABLE ALIGN="CENTER">
-<TR><TD>
-<H1>Chattr</H1>
-</TD></TR>
-<TR><TD>
-<H2><?php echo "YOUR ERROR MESSAGE GOES HERE" ?></H2>
-<a href="index.php">Back</a>
-</TD></TR>
 </TABLE>
 </BODY>
