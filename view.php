@@ -40,16 +40,44 @@
 		//         <TD>USER NAME GOES HERE</TD>
 		//         <TD>MESSAGE TEXT GOES HERE</TD>
 		//     </TR>
+        $host = "localhost";
+        $user = "chattr";
+        $pass = "toomanysecrets";
+        $db = "chattr";
+        $con = pg_connect("host=$host port=5432 dbname=$db user=$user password=$pass") or die ("Failed connection\n");
+        $urlName = $_GET['user'];
+        $stmt = "SELECT post_ref, posttime, message FROM post WHERE post_ref=$urlName";
+        $query = pg_query($con, $stmt);
+
+        // if true
+        if($query)
+        {
+            while($row = pg_fetch_row($query))
+            {
+    ?>
+                <TR>
+                    <TD><?php echo "$row[1]" ?></TD>
+                    <TD><?php echo "$row[3]" ?></TD>
+                    <TD><?php echo "$row[2]" ?></TD>
+                </TR>
+    <?php
+            }
+        }
     ?>
     </TABLE>
     </TD></TR>
 <?php
 	// The following <TR> element should be displayed if the user
 	// name does not exist. Add code to display user name.
+        else
+        {
 ?>
     <TR><TD>
-    <H2>User <?php echo "USER NAME GOES HERE" ?> does not exist!</H2>
+    <H2>User <?php echo "$urlName" ?> does not exist!</H2>
     </TD></TR>
+<?php
+        }
+?>
 <?php
 	// The following <TR> element should only be shown if the user
 	// is logged in.
