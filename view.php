@@ -54,9 +54,13 @@
 	// The following <TR> element should only be shown if the user
 	// is logged in.
 ?>
+<?php 
+    if($username != null)
+    {
+?>
 <TR><TD><A HREF="logout.php">Logout</A></TR></TD>
 <?php
-	// Done!
+	}// Done!
 ?>
 </TABLE>
 </BODY>
