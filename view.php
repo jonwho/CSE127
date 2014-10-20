@@ -11,6 +11,10 @@
 <?php
 	// The following <TR> element should only appear if the user is
 	// logged in and viewing his own entry.
+    session_start();
+    $username = $_SESSION['username'];
+    if($username != null)
+    {
 ?>
     <TR><TD>
     <FORM ACTION="post.php" METHOD="POST">
@@ -19,7 +23,8 @@
     <INPUT TYPE="SUBMIT" VALUE="Submit"></TD></TR>
     </TABLE>
     </FORM>
-    </TD></TR>  
+    </TD></TR>
+<?php } ?>  
 <?php
 	// The following <TR> element should always appear if the user
 	// exists.
