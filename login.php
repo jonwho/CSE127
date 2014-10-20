@@ -38,7 +38,7 @@ if(isset($_POST['NEW']))
 	// Your new user creation code goes here. If the user name
 	// already exists, then display an error. Otherwise, create a new
 	// user account and send him to view.php.
-	$query = pg_query($con, "SELECT username FROM poster WHERE username'$username'");
+	$query = pg_query($con, "SELECT username FROM poster WHERE username='$username'");
 	if(!$query)
 		// handle error
 	if(!$row = pg_fetch_row($query))
