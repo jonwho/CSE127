@@ -25,6 +25,7 @@ $host = "localhost";
 $user = "chattr";
 $pass = "toomanysecrets";
 $db = "chattr";
+$con = pg_connect("host=$host port=5432 dbname=$db user=$user password=$pass") or die ("Failed connection\n");
 
 // don't let user jump to login.php
 if($_POST == null)
@@ -32,7 +33,8 @@ if($_POST == null)
 
 $username = $_POST['USER'];
 $password = $_POST['PASS'];
-if(isset($_POST['NEW'])) {
+if(isset($_POST['NEW'])) 
+{
 	// Your new user creation code goes here. If the user name
 	// already exists, then display an error. Otherwise, create a new
 	// user account and send him to view.php.
@@ -41,24 +43,43 @@ if(isset($_POST['NEW'])) {
 		// handle error
 	if(!$row = pg_fetch_row($query))
 	{
-		$stmt = "INSERT INTO poster(username, password) VALUES('$username', '$password');
-		pg_query($con, $stmt) or die("Failed to execute: $stmt\n");
+		$stmt = "INSERT INTO poster(username, password) VALUES('$username', '$password')";
+		pg_query($con, $stmt) or die ("Failed to execute: $stmt\n");
 		header("Location: view.php?user=$username");
 	}
 	else
 	{
+?>
 		<TR>
 			<TD>
 				<H2><?php echo "User $username already exists!" ?></H2>
+				<a href="index.php">Back</a>
 			</TD>
 		</TR>
+<?php
 	}
-} else {
+} 
+else 
+{
 	// Your user login code goes here. If the user name and password
 	// are not correct, then display an error. Otherwise, log in the
 	// user and send him to view.php.
-	<H2><?php echo "YOUR ERROR MESSAGE GOES HERE" ?></H2>
-	<a href="index.php">Back</a>
+	$query = pg_query($con, "SELECT username FROM poster WHERE username='$username' AND password='$password'");
+	if(!$row = pg_fetch_row($query))
+	{
+?>
+		<TR>
+			<TD>
+				<H2><?php echo "Login Failed!" ?></H2>
+				<a href="index.php">Back</a>
+			</TD>
+		</TR>
+<?php
+	}
+	else
+	{
+		header("Location: view.php?user=$username");
+	}
 }
 ?>
 </TABLE>
