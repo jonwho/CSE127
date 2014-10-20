@@ -3,6 +3,15 @@
 <TITLE>Chattr</TITLE>
 </HEAD>
 <BODY BGCOLOR=WHITE>
+	<?php
+		$host = "localhost";
+		$user = "chattr";
+		$pass = "toomanysecrets";
+		$db = "test";
+
+		$con = pg_connect("host=$host port=5432 dbname=$db user=$user password=$pass")
+		or die ("Could not connect to server\n");
+	?>
 <TABLE ALIGN="CENTER">
 <TR><TD>
 <H1>Chattr</H1>

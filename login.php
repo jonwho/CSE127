@@ -7,8 +7,15 @@
 //
 //     header('Location: view.php');
 //
-// This will send the user tp view.php. To use this mechanism, the
+// This will send the user to view.php. To use this mechanism, the
 // statement must be executed before any of the document is output.
+
+$host = "localhost";
+$user = "chattr";
+$pass = "toomanysecrets";
+$db = "chattr";
+
+
 
 if(isset($_POST['NEW'])) {
 	// Your new user creation code goes here. If the user name
