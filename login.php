@@ -21,6 +21,7 @@
 // This will send the user to view.php. To use this mechanism, the
 // statement must be executed before any of the document is output.
 
+session_start();
 $host = "localhost";
 $user = "chattr";
 $pass = "toomanysecrets";
@@ -42,10 +43,12 @@ if(isset($_POST['NEW']))
 	$query = pg_query($con, $stmt);
 	if($query)
 	{
+		$_SESSION['username'] = $username;
 		header("Location: view.php?user=$username");
 	}
 	else
 	{
+		session_unset();
 ?>
 		<TR>
 			<TD>
@@ -64,6 +67,7 @@ else
 	$query = pg_query($con, "SELECT username FROM poster WHERE username='$username' AND password='$password'");
 	if(!$row = pg_fetch_row($query))
 	{
+		session_unset();
 ?>
 		<TR>
 			<TD>
@@ -75,6 +79,7 @@ else
 	}
 	else
 	{
+		$_SESSION['username'] = $username;
 		header("Location: view.php?user=$username");
 	}
 }

@@ -4,13 +4,10 @@
 </HEAD>
 <BODY BGCOLOR=WHITE>
 	<?php
-		$host = "localhost";
-		$user = "chattr";
-		$pass = "toomanysecrets";
-		$db = "tester";
-
-		$con = pg_connect("host=$host port=5432 dbname=$db user=$user password=$pass")
-		or die ("Could not connect to server\n");
+		session_start();
+		$username = $_SESSION['username'];
+		if($username != null)
+			header("Location: view.php?user=$username");
 	?>
 <TABLE ALIGN="CENTER">
 <TR><TD>
