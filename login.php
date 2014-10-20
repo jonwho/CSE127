@@ -41,7 +41,8 @@ if(isset($_POST['NEW']))
 	$query = pg_query($con, "SELECT username FROM poster WHERE username='$username'");
 	if(!$query)
 		// handle error
-	if(!$row = pg_fetch_row($query))
+	$row = pg_fetch_row($query);
+	if(!$row)
 	{
 		$stmt = "INSERT INTO poster(username, password) VALUES('$username', '$password')";
 		pg_query($con, $stmt) or die ("Failed to execute: $stmt\n");
