@@ -7,7 +7,7 @@
 		$host = "localhost";
 		$user = "chattr";
 		$pass = "toomanysecrets";
-		$db = "test";
+		$db = "tester";
 
 		$con = pg_connect("host=$host port=5432 dbname=$db user=$user password=$pass")
 		or die ("Could not connect to server\n");
