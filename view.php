@@ -22,6 +22,10 @@
 	// logged in and viewing his own entry.
     session_start();
     $username = $_SESSION['username'];
+
+    if($_GET == null and $username == null)
+        header("Location: index.php");
+
     // if logged in and no args on view.php still view self-posts
     if($username == $urlName or ($username != null and $_GET == null))
     {
