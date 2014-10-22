@@ -76,7 +76,9 @@
 <?php
 	// The following <TR> element should be displayed if the user
 	// name does not exist. Add code to display user name.
-    else
+    $stmt = "SELECT username FROM poster WHERE username='$urlName'";
+    $query = pg_query($con, $stmt);
+    if(!$query)
     {
 ?>
     <TR><TD>
