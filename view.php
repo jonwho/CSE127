@@ -64,12 +64,13 @@
         <TD><?php echo "$row[3]" ?></TD>
         <TD><?php echo "$row[2]" ?></TD>
     </TR>
+
+    </TABLE>
+    </TD></TR>
 <?php
         }
     }
 ?>
-    </TABLE>
-    </TD></TR>
 <?php
 	// The following <TR> element should be displayed if the user
 	// name does not exist. Add code to display user name.
