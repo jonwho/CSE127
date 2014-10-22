@@ -19,7 +19,7 @@ $host = "localhost";
 $user = "chattr";
 $pass = "toomanysecrets";
 $db = "chattr";
-$con = pg_connect("host=$host port=5432 dbname=$db user=$user password=$password") or die ("Failed connection\n");
+$con = pg_connect("host=$host port=5432 dbname=$db user=$user password=$pass") or die ("Failed connection\n");
 $text = $_POST['TEXT'];
 $username = $_SESSION['username'];
 $stmt = "INSERT INTO post(post_ref, message) VALUES('$username', '$text')";
