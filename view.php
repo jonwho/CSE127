@@ -23,7 +23,7 @@
     session_start();
     $username = $_SESSION['username'];
     // if logged in and no args on view.php still view self-posts
-    if($username == $urlName or ($username != null && $_GET == null))
+    if($username == $urlName or ($username != null and $_GET == null))
     {
 ?>
     <TR><TD>
@@ -44,7 +44,7 @@
     $query = pg_query($con, $stmt);
     $validUser = pg_fetch_row($query);
     // if a row exists with that user then it's true
-    if($validUser)
+    if($validUser or ($username != null and $_GET == null))
     {
 ?>
     <TR><TD>
