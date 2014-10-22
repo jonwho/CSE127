@@ -24,15 +24,33 @@
     </TABLE>
     </FORM>
     </TD></TR>
-<?php } ?>  
+<?php 
+    } 
+?>  
 <?php
 	// The following <TR> element should always appear if the user
 	// exists.
 ?>
+<?php
+    $host = "localhost";
+    $user = "chattr";
+    $pass = "toomanysecrets";
+    $db = "chattr";
+    $con = pg_connect("host=$host port=5432 dbname=$db user=$user password=$pass") or die ("Failed connection\n");
+    $urlName = $_GET['user'];
+    $stmt = "SELECT post_ref, posttime, message FROM post WHERE post_ref=$urlName";
+    $query = pg_query($con, $stmt);
+
+    // if true
+    if(!$query)
+    {
+        while($row = pg_fetch_row($query))
+        {
+?>
     <TR><TD>
     <TABLE CELLPADDING=5>
     <TR><TH>When</TH><TH>Who</TH><TH>What</TH></TR>
-	<?php
+<?php
 		// Display user's posts here. The structure is:
 		//
 		//     <TR>
@@ -40,30 +58,16 @@
 		//         <TD>USER NAME GOES HERE</TD>
 		//         <TD>MESSAGE TEXT GOES HERE</TD>
 		//     </TR>
-        $host = "localhost";
-        $user = "chattr";
-        $pass = "toomanysecrets";
-        $db = "chattr";
-        $con = pg_connect("host=$host port=5432 dbname=$db user=$user password=$pass") or die ("Failed connection\n");
-        $urlName = $_GET['user'];
-        $stmt = "SELECT post_ref, posttime, message FROM post WHERE post_ref=$urlName";
-        $query = pg_query($con, $stmt);
-
-        // if true
-        if($query)
-        {
-            while($row = pg_fetch_row($query))
-            {
-    ?>
-                <TR>
-                    <TD><?php echo "$row[1]" ?></TD>
-                    <TD><?php echo "$row[3]" ?></TD>
-                    <TD><?php echo "$row[2]" ?></TD>
-                </TR>
-    <?php
-            }
+?>
+    <TR>
+        <TD><?php echo "$row[1]" ?></TD>
+        <TD><?php echo "$row[3]" ?></TD>
+        <TD><?php echo "$row[2]" ?></TD>
+    </TR>
+<?php
         }
-    ?>
+    }
+?>
     </TABLE>
     </TD></TR>
 <?php
