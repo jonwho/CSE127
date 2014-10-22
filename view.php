@@ -22,7 +22,7 @@
 	// logged in and viewing his own entry.
     session_start();
     $username = $_SESSION['username'];
-    if($username != null)
+    if($username == $urlName)
     {
 ?>
     <TR><TD>
@@ -76,8 +76,7 @@
 <?php
 	// The following <TR> element should be displayed if the user
 	// name does not exist. Add code to display user name.
-    $query = pg_query($con, "SELECT username FROM poster WHERE username='$urlName'");
-    if(!$query)
+    else
     {
 ?>
     <TR><TD>
