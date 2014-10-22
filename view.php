@@ -59,6 +59,9 @@
 		//         <TD>MESSAGE TEXT GOES HERE</TD>
 		//     </TR>
         $postStmt = "SELECT posttime, post_ref, message FROM post WHERE post_ref='$urlName'";
+        // overwrite postStmt if $_GET is null
+        if($_GET == null)
+            $postStmt = "SELECT posttime, post_ref, message FROM post WHERE post_ref='$username'";
         $postQuery = pg_query($con, $postStmt);
         while($row = pg_fetch_row($postQuery))
         {
