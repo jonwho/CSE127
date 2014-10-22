@@ -42,9 +42,9 @@
     $stmt = "SELECT username FROM poster WHERE username='$urlName'";
     //$stmt = "SELECT post_ref, posttime, message FROM post WHERE post_ref='$urlName'";
     $query = pg_query($con, $stmt);
-
-    // if user exists then show
-    if($query)
+    $validUser = pg_fetch_row($query);
+    // if a row exists with that user then it's true
+    if($validUser)
     {
 ?>
     <TR><TD>
@@ -76,9 +76,7 @@
 <?php
 	// The following <TR> element should be displayed if the user
 	// name does not exist. Add code to display user name.
-    $stmt = "SELECT username FROM poster WHERE username='$urlName'";
-    $query = pg_query($con, $stmt);
-    if(!$query)
+    if(!$validUser)
     {
 ?>
     <TR><TD>
