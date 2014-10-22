@@ -24,4 +24,5 @@ $text = $_POST['TEXT'];
 $username = $_SESSION['username'];
 $stmt = "INSERT INTO post(post_ref, message) VALUES('$username', '$text')";
 pg_query($con, $stmt);
+header("Location: view?user=$username");
 ?>
