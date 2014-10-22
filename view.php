@@ -22,7 +22,8 @@
 	// logged in and viewing his own entry.
     session_start();
     $username = $_SESSION['username'];
-    if($username == $urlName)
+    // if logged in and no args on view.php still view self-posts
+    if($username == $urlName or ($username != null && $_GET == null))
     {
 ?>
     <TR><TD>
@@ -76,7 +77,8 @@
 <?php
 	// The following <TR> element should be displayed if the user
 	// name does not exist. Add code to display user name.
-    if(!$validUser)
+    
+    if(!$validUser and $urlName != null)
     {
 ?>
     <TR><TD>
