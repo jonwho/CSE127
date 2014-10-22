@@ -40,7 +40,6 @@
     // The following <TR> element should always appear if the user
     // exists.
     $stmt = "SELECT username FROM poster WHERE username='$urlName'";
-    //$stmt = "SELECT post_ref, posttime, message FROM post WHERE post_ref='$urlName'";
     $query = pg_query($con, $stmt);
     $validUser = pg_fetch_row($query);
     // if a row exists with that user then it's true
@@ -58,12 +57,13 @@
 		//         <TD>USER NAME GOES HERE</TD>
 		//         <TD>MESSAGE TEXT GOES HERE</TD>
 		//     </TR>
-        while($row = pg_fetch_row($query))
+        $postQuery = "SELECT posttime, post_ref, message FROM post WHERE post_ref='$urlName'";
+        while($row = pg_fetch_row($postQuery))
         {
 ?>
             <TR>
+                <TD><?php echo "$row[0]" ?></TD>
                 <TD><?php echo "$row[1]" ?></TD>
-                <TD><?php echo "$row[3]" ?></TD>
                 <TD><?php echo "$row[2]" ?></TD>
             </TR>
 
