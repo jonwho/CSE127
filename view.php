@@ -57,7 +57,8 @@
 		//         <TD>USER NAME GOES HERE</TD>
 		//         <TD>MESSAGE TEXT GOES HERE</TD>
 		//     </TR>
-        $postQuery = "SELECT posttime, post_ref, message FROM post WHERE post_ref='$urlName'";
+        $postStmt = "SELECT posttime, post_ref, message FROM post WHERE post_ref='$urlName'";
+        $postQuery = pg_query($con, $postStmt);
         while($row = pg_fetch_row($postQuery))
         {
 ?>
