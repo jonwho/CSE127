@@ -39,7 +39,8 @@
 <?php
     // The following <TR> element should always appear if the user
     // exists.
-    $stmt = "SELECT post_ref, posttime, message FROM post WHERE post_ref=$urlName";
+    $stmt = "SELECT username FROM poster WHERE username='$urlName'";
+    //$stmt = "SELECT post_ref, posttime, message FROM post WHERE post_ref='$urlName'";
     $query = pg_query($con, $stmt);
 
     // if true
